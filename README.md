@@ -1,4 +1,4 @@
-# PFWORK
+PFWORK
 Trabalho da UC Programação Funcional
 
 A loja organiza cada peça por artigo e por peças. Uma peça corresponde a uma combinação de tamanho e cor; por exemplo, uma camisola pode existir em tamanho S e M, nas cores preta e branca.
