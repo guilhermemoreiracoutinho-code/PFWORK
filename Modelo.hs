@@ -1,1 +1,0 @@
-Define os tipos de dados da loja: categorias, artigos e variantes. Uma variante representa uma combinação de tamanho e cor e guarda a quantidade disponível, o mínimo e o alvo. Incluir os dados de vendas recentes por variante.

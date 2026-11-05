@@ -1,1 +1,0 @@
-contém artigos para demonstrar o funcionamento, incluindo casos abaixo, no e acima do nível mínimo. Mostrar variantes com procura alta, procura baixa e pouco stock.
