@@ -1,0 +1,1 @@
+Contém as funções e regras da loja: pesquisar artigos, registar vendas e reposições e recomendar quantas peças repor e calcular a média de vendas, a quantidade recomendada e a prioridade de reposição.
