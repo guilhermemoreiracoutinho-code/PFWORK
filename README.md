@@ -124,7 +124,7 @@ O que faz: Termina a execução do programa.
 
 ### Tamanho ou cor inválidos ##
 
-Se for introduzido um tamanho ou uma cor inválidos, por exemplo `XL` ou `preta`, o programa assume automaticamente:
+Se for introduzido um tamanho ou uma cor inválidos, por exemplo XL ou preta`, o programa assume automaticamente:
 Tamanho inválido: `S`;
 Cor inválida: `Preta`.
 

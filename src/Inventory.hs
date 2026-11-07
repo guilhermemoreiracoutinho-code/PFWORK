@@ -3,7 +3,11 @@ module Inventory where
 import Model
  
 procurarPecas :: String -> [Peca] -> [Peca]
-procurarPecas codigo = filter ((== codigo) . codigoArtigo . artigo)
+procurarPecas _ [] = []
+procurarPecas codigo (peca:resto)
+  | codigo == codigoArtigo (artigo peca) =
+      peca : procurarPecas codigo resto
+  | otherwise = procurarPecas codigo resto
  
 -- Procura a peca com o codigo, tamanho e cor indicados e aplica a operacao.
 -- Devolve True e o inventario atualizado se a operacao for aceite,
@@ -11,18 +15,18 @@ procurarPecas codigo = filter ((== codigo) . codigoArtigo . artigo)
 alterarStock
   :: (Int -> Peca -> Maybe Peca)
   -> String -> Tamanho -> Cor -> Int -> [Peca] -> (Bool, [Peca])
-alterarStock operacao codigo tam corEscolhida unidades pecas =
-  case break coincide pecas of
-    (antes, peca : depois) ->
-      maybe (False, pecas)
-            (\nova -> (True, antes ++ nova : depois))
-            (operacao unidades peca)
-    _ -> (False, pecas)
-  where
-    coincide peca =
-      codigo == codigoArtigo (artigo peca)
-        && tam == tamanho peca
-        && corEscolhida == cor peca
+alterarStock _ _ _ _ _ [] = (False, [])
+alterarStock operacao codigo tam corEscolhida unidades (peca:resto)
+  | codigo == codigoArtigo (artigo peca)
+    && tam == tamanho peca
+    && corEscolhida == cor peca =
+      case operacao unidades peca of
+        Just nova -> (True, nova : resto)
+        Nothing -> (False, peca : resto)
+  | otherwise =
+      let (aceite, novoResto) =
+            alterarStock operacao codigo tam corEscolhida unidades resto
+      in (aceite, peca : novoResto)
  
 registarVenda :: String -> Tamanho -> Cor -> Int -> [Peca] -> (Bool, [Peca])
 registarVenda = alterarStock $ \unidades peca ->

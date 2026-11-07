@@ -1,6 +1,6 @@
 module Model where
 
-data Tamanho = S | M | L
+data Tamanho = XS | S | M | L
   deriving (Show, Eq)
 
 data Cor = Preta | Branca

@@ -49,29 +49,34 @@ pedirOperacao
 pedirOperacao operacao inventario = do
   putStr "Codigo: "
   codigo <- getLine
-  putStr "Tamanho (S, M ou L): "
+  putStr "Tamanho (XS, S, M ou L): "
   textoTamanho <- getLine
   putStr "Cor (Preta ou Branca): "
   textoCor <- getLine
   putStr "Quantidade: "
   unidades <- readLn
 
-  let (aceite, novoInventario) =
-        operacao codigo (lerTamanho textoTamanho) (lerCor textoCor)
-          unidades inventario
-  print aceite
-  return novoInventario
+  case (lerTamanho textoTamanho, lerCor textoCor) of
+    (Just tam, Just corEscolhida) -> do
+      let (aceite, novoInventario) =
+            operacao codigo tam corEscolhida unidades inventario
+      print aceite
+      return novoInventario
+    _ -> do
+      putStrLn "Tamanho ou cor invalidos. Nada foi alterado."
+      return inventario
 
-lerTamanho :: String -> Tamanho
-lerTamanho "S" = S
-lerTamanho "M" = M
-lerTamanho "L" = L
-lerTamanho _ = S
+lerTamanho :: String -> Maybe Tamanho
+lerTamanho "XS" = Just XS
+lerTamanho "S" = Just S
+lerTamanho "M" = Just M
+lerTamanho "L" = Just L
+lerTamanho _ = Nothing
 
-lerCor :: String -> Cor
-lerCor "Preta" = Preta
-lerCor "Branca" = Branca
-lerCor _ = Preta
+lerCor :: String -> Maybe Cor
+lerCor "Preta" = Just Preta
+lerCor "Branca" = Just Branca
+lerCor _ = Nothing
 
 -- Formato: CAM-01 | Camisola Basica | M | Preta | Stock: 4 | Minimo: 2 | Alvo: 6
 formatarPeca :: Peca -> String
