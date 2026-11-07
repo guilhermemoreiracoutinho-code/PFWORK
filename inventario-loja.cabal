@@ -1,0 +1,16 @@
+cabal-version: 2.4
+name: inventario-loja
+version: 0.1.0.0
+build-type: Simple
+
+executable inventario-loja
+  main-is: Main.hs
+  hs-source-dirs: app, src
+  other-modules:
+      Examples
+      Inventory
+      Model
+  build-depends:
+      base >=4.14 && <5
+  default-language: Haskell2010
+  ghc-options: -Wall

@@ -1,12 +1,27 @@
-PFWORK
-Trabalho da UC Programação Funcional
+# Inventario de Loja - Fase 1
 
-A loja organiza cada peça por artigo e por peças. Uma peça corresponde a uma combinação de tamanho e cor; por exemplo, uma camisola pode existir em tamanho S e M, nas cores preta e branca.
+## Objetivo
 
-Para cada pela, a loja acompanha a quantidade disponível, uma quantidade mínima e uma quantidade alvo. Uma venda reduz a quantidade disponível, desde que haja peças suficientes. Uma reposição aumenta a quantidade da peça escolhida.
+O programa gere o stock de uma loja de roupa. Cada peca tem artigo, tamanho, cor, stock disponivel, stock minimo, stock alvo e vendas recentes. O sistema permite ver o inventario, pesquisar por codigo, vender, repor e consultar recomendacoes de reposicao.
 
-O sistema analisa as peças e assinala as que ficam abaixo do nível mínimo. Para cada uma, calcula quantas peças devem ser repostas para atingir a quantidade alvo. Por exemplo, se uma delas tiver 1 peça, um mínimo de 2 e um alvo de 6, recomenda repor 5 peças. Uma peça exatamente no mínimo não gera recomendação.
+Uma recomendacao aparece apenas quando o stock esta abaixo do minimo. A quantidade sugerida permite atingir o stock alvo. A media de vendas dos ultimos sete dias ajuda a definir a prioridade.
 
-Os artigos também podem ser pesquisados pelo nome ou código. Assim, a loja usa o inventário para decidir quais os tamanhos e cores que precisam de reposição e em que quantidade.
+## Executar
 
-Este trabalho ira ter tambem os dados de venda recentes, mostrar artigos com procura alta, procura baixa e stock, e calcular a média de vendas, quantidades recomendadas e prioridade de reposição.
+Na pasta do projeto, execute:
+
+```powershell
+cabal run inventario-loja
+```
+
+## Comandos
+
+- `ver` mostra todas as pecas.
+- `recomendar` mostra as pecas abaixo do stock minimo.
+- `pesquisar` procura todas as pecas de um codigo, por exemplo `CAM-01`.
+- `vender` reduz o stock de uma peca, se existir quantidade suficiente.
+- `repor` aumenta o stock de uma peca.
+- `sair` termina o programa.
+
+Para os tamanhos, escreva `S`, `M` ou `L`. Para as cores, escreva `Preta` ou `Branca`.
+
