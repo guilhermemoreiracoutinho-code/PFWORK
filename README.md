@@ -29,7 +29,7 @@ cabal run inventario-loja
 
 Depois de iniciar, o programa apresenta o menu e aguarda que o utilizador escreva um comando e carregue em Enter.
 
-Comandos: ver | pesquisar | vender | repor | sair
+Comandos: ver | recomendar | pesquisar | vender | repor | sair
 Opcao:
 
 ## Dados a introduzir ##
@@ -38,7 +38,7 @@ Durante a utilização do programa, podem ser solicitados os seguintes dados:
 
  Campo       Formato             Exemplo 
  Código      Código do artigo    CAM-01 
- Tamanho     S, M ou L           M 
+ Tamanho     XS, S, M ou L       M 
  Cor         Preta ou Branca     Preta 
  Quantidade  Número inteiro      2 
 
@@ -60,7 +60,7 @@ CAM-01 | Camisola Basica | M | Preta | Stock: 4 | Minimo: 2 | Alvo: 6
 
 ## Recomendar — `recomendar` ##
 
-Apresenta as peças e quanto necessitam de stock.
+Indica a quantidade a repor para atingir o stock alvo
 
 
 ## Pesquisar artigo — `pesquisar` ##
@@ -128,9 +128,7 @@ O que faz: Termina a execução do programa.
 
 ### Tamanho ou cor inválidos ##
 
-Se for introduzido um tamanho ou uma cor inválidos, por exemplo XL ou preta, o programa assume automaticamente:
-Tamanho inválido: S;
-Cor inválida: Preta.
+Se for introduzido um tamanho ou uma cor inválidos, por exemplo XL ou preta, o programa termina com um erro "tamanho invalido" ou "cor invalida"
 
 ### Quantidade inválida ##
 
