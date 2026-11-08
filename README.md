@@ -101,7 +101,7 @@ False: A venda foi recusada e o stock permaneceu igual.
 
 A venda é recusada quando:
 A quantidade é superior ao stock disponível;
-A quantidade é zero ou negativa;
+A quantidade é zero;
 A peça não existe no inventário.
 
 ### Repor stock — `repor` ##
@@ -119,7 +119,7 @@ True: A reposição foi aceite e o stock aumentou.
 False: A reposição foi recusada e o stock permaneceu igual.
 
 A reposição é recusada quando:
-A quantidade é zero ou negativa;
+A quantidade é zero;
 A peça não existe no inventário.
  
 ### Sair — `sair` ##
@@ -129,12 +129,6 @@ O que faz: Termina a execução do programa.
 ### Tamanho ou cor inválidos ##
 
 Se for introduzido um tamanho, uma cor ou uma quantidade inválidos, por exemplo XL, preta ou abc, o programa mostra uma mensagem "Tamanho invalido.", "Cor invalida." ou "Quantidade invalida." e volta ao menu, sem alterar o inventário.
-
-### Quantidade inválida ##
-
-A quantidade deve ser introduzida como um número inteiro.
-
-Se for introduzido texto ou outro valor que não corresponda a um número inteiro, o programa termina com um erro.
 
 ### Peças fixas ##
 
