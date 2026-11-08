@@ -58,6 +58,10 @@ Exemplo:
 
 CAM-01 | Camisola Basica | M | Preta | Stock: 4 | Minimo: 2 | Alvo: 6
 
+## Recomendar — `recomendar` ##
+
+Apresenta as peças e quanto necessitam de stock.
+
 
 ## Pesquisar artigo — `pesquisar` ##
 
