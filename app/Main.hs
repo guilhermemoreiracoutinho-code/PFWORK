@@ -1,11 +1,13 @@
 module Main where
 
+import System.IO
 import Model
 import Inventory
 import Examples
 
 main :: IO ()
 main = do
+  hSetBuffering stdout NoBuffering
   putStrLn "=== INVENTARIO DA LOJA ==="
   executar inventarioExemplo
 
@@ -57,7 +59,7 @@ mostrarRecomendacoes ((peca, n):resto) = do
   putStrLn (formatarPeca peca ++ " | Repor: " ++ show n)
   mostrarRecomendacoes resto
 
--- sinal: -1 para vender (tira stock), 1 para repor (acrescenta stock)
+
 pedirOperacao :: Int -> [Peca] -> IO [Peca]
 pedirOperacao sinal inventario = do
   putStr "Codigo: "
@@ -67,10 +69,21 @@ pedirOperacao sinal inventario = do
   putStr "Cor (Preta ou Branca): "
   textoCor <- getLine
   putStr "Quantidade: "
-  unidades <- readLn
+  textoUnidades <- getLine
 
-  let (aceite, novoInventario) =
-        alterarStock sinal codigo (lerTamanho textoTamanho) (lerCor textoCor)
-          unidades inventario
-  print aceite
-  return novoInventario
+  if not (tamanhoValido textoTamanho) then do
+    putStrLn "Tamanho invalido."
+    return inventario
+  else if not (corValida textoCor) then do
+    putStrLn "Cor invalida."
+    return inventario
+  else if not (quantidadeValida textoUnidades) then do
+    putStrLn "Quantidade invalida."
+    return inventario
+  else do
+    let unidades = read textoUnidades
+        (aceite, novoInventario) =
+          alterarStock sinal codigo (lerTamanho textoTamanho)
+            (lerCor textoCor) unidades inventario
+    print aceite
+    return novoInventario

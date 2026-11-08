@@ -128,7 +128,7 @@ O que faz: Termina a execução do programa.
 
 ### Tamanho ou cor inválidos ##
 
-Se for introduzido um tamanho ou uma cor inválidos, por exemplo XL ou preta, o programa termina com um erro "tamanho invalido" ou "cor invalida"
+Se for introduzido um tamanho, uma cor ou uma quantidade inválidos, por exemplo XL, preta ou abc, o programa mostra uma mensagem "Tamanho invalido.", "Cor invalida." ou "Quantidade invalida." e volta ao menu, sem alterar o inventário.
 
 ### Quantidade inválida ##
 

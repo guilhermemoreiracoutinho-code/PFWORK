@@ -21,9 +21,7 @@ recomendacoes (peca:resto)
       (peca, quantidadeRepor peca) : recomendacoes resto
   | otherwise = recomendacoes resto
 
--- sinal: -1 para vender (tira stock), 1 para repor (acrescenta stock).
--- Devolve True e o inventario atualizado se a operacao for aceite,
--- ou False e o inventario igual se for recusada.
+-- Devolve True e o inventario atualizado se a operacao for aceite ou False e o inventario igual se for recusada.
 alterarStock :: Int -> String -> Tamanho -> Cor -> Int -> [Peca] -> (Bool, [Peca])
 alterarStock _ _ _ _ _ [] = (False, [])
 alterarStock sinal codigo tam corEscolhida unidades (peca:resto)
