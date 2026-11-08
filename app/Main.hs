@@ -64,27 +64,4 @@ pedirOperacao sinal inventario = do
           unidades inventario
   print aceite
   return novoInventario
-
-lerTamanho :: String -> Tamanho
-lerTamanho "XS" = XS
-lerTamanho "S" = S
-lerTamanho "M" = M
-lerTamanho "L" = L
-lerTamanho _ = error "tamanho invalido"
-
-lerCor :: String -> Cor
-lerCor "Preta" = Preta
-lerCor "Branca" = Branca
-lerCor _ = error "cor invalida"
-
--- Formato: CAM-01 | Camisola Basica | M | Preta | Stock: 4 | Minimo: 2 | Alvo: 6
-formatarPeca :: Peca -> String
-formatarPeca peca =
-  codigoArtigo (artigo peca) ++ " | "
-    ++ nomeArtigo (artigo peca) ++ " | "
-    ++ show (tamanho peca) ++ " | "
-    ++ show (cor peca) ++ " | "
-    ++ "Stock: " ++ show (stockDisponivel peca) ++ " | "
-    ++ "Minimo: " ++ show (stockMinimo peca) ++ " | "
-    ++ "Alvo: " ++ show (stockAlvo peca)
  
