@@ -3,7 +3,6 @@ module Main where
 import Model
 import Inventory
 import Examples
-import Data.List (intercalate)
 
 main :: IO ()
 main = do
@@ -18,21 +17,21 @@ executar inventario = do
 
   case comando of
     "ver" -> do
-      mapM_ (putStrLn . formatarPeca) inventario
+      mostrarPecas inventario
       executar inventario
 
     "pesquisar" -> do
       putStr "Codigo do artigo: "
       codigo <- getLine
-      mapM_ (putStrLn . formatarPeca) (procurarPecas codigo inventario)
+      mostrarPecas (procurarPecas codigo inventario)
       executar inventario
 
     "vender" -> do
-      novoInventario <- pedirOperacao registarVenda inventario
+      novoInventario <- pedirOperacao (-1) inventario
       executar novoInventario
 
     "repor" -> do
-      novoInventario <- pedirOperacao registarReposicao inventario
+      novoInventario <- pedirOperacao 1 inventario
       executar novoInventario
 
     "sair" ->
@@ -42,11 +41,15 @@ executar inventario = do
       putStrLn "Comando nao reconhecido."
       executar inventario
 
--- Pede codigo, tamanho, cor e quantidade e aplica a operacao (venda ou reposicao).
-pedirOperacao
-  :: (String -> Tamanho -> Cor -> Int -> [Peca] -> (Bool, [Peca]))
-  -> [Peca] -> IO [Peca]
-pedirOperacao operacao inventario = do
+mostrarPecas :: [Peca] -> IO ()
+mostrarPecas [] = return ()
+mostrarPecas (peca:resto) = do
+  putStrLn (formatarPeca peca)
+  mostrarPecas resto
+
+-- sinal: -1 para vender (tira stock), 1 para repor (acrescenta stock)
+pedirOperacao :: Int -> [Peca] -> IO [Peca]
+pedirOperacao sinal inventario = do
   putStr "Codigo: "
   codigo <- getLine
   putStr "Tamanho (XS, S, M ou L): "
@@ -56,38 +59,32 @@ pedirOperacao operacao inventario = do
   putStr "Quantidade: "
   unidades <- readLn
 
-  case (lerTamanho textoTamanho, lerCor textoCor) of
-    (Just tam, Just corEscolhida) -> do
-      let (aceite, novoInventario) =
-            operacao codigo tam corEscolhida unidades inventario
-      print aceite
-      return novoInventario
-    _ -> do
-      putStrLn "Tamanho ou cor invalidos. Nada foi alterado."
-      return inventario
+  let (aceite, novoInventario) =
+        alterarStock sinal codigo (lerTamanho textoTamanho) (lerCor textoCor)
+          unidades inventario
+  print aceite
+  return novoInventario
 
-lerTamanho :: String -> Maybe Tamanho
-lerTamanho "XS" = Just XS
-lerTamanho "S" = Just S
-lerTamanho "M" = Just M
-lerTamanho "L" = Just L
-lerTamanho _ = Nothing
+lerTamanho :: String -> Tamanho
+lerTamanho "XS" = XS
+lerTamanho "S" = S
+lerTamanho "M" = M
+lerTamanho "L" = L
+lerTamanho _ = error "tamanho invalido"
 
-lerCor :: String -> Maybe Cor
-lerCor "Preta" = Just Preta
-lerCor "Branca" = Just Branca
-lerCor _ = Nothing
+lerCor :: String -> Cor
+lerCor "Preta" = Preta
+lerCor "Branca" = Branca
+lerCor _ = error "cor invalida"
 
 -- Formato: CAM-01 | Camisola Basica | M | Preta | Stock: 4 | Minimo: 2 | Alvo: 6
 formatarPeca :: Peca -> String
 formatarPeca peca =
-  intercalate " | "
-    [ codigoArtigo (artigo peca)
-    , nomeArtigo (artigo peca)
-    , show (tamanho peca)
-    , show (cor peca)
-    , "Stock: " ++ show (stockDisponivel peca)
-    , "Minimo: " ++ show (stockMinimo peca)
-    , "Alvo: " ++ show (stockAlvo peca)
-    ]
+  codigoArtigo (artigo peca) ++ " | "
+    ++ nomeArtigo (artigo peca) ++ " | "
+    ++ show (tamanho peca) ++ " | "
+    ++ show (cor peca) ++ " | "
+    ++ "Stock: " ++ show (stockDisponivel peca) ++ " | "
+    ++ "Minimo: " ++ show (stockMinimo peca) ++ " | "
+    ++ "Alvo: " ++ show (stockAlvo peca)
  

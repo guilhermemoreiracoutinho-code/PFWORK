@@ -79,7 +79,7 @@ Vende uma determinada peça/peças escolhida.
 
 Pede os seguintes dados, introduzidos individualmente:
 . Código do artigo;
-. Tamanho (S, M ou L);
+. Tamanho (XS, S, M ou L);
 . Cor (Preta ou Branca);
 . Quantidade a vender.
 
@@ -87,7 +87,7 @@ Exemplo:
 
 
 Codigo: CAM-01
-Tamanho (S, M ou L): M
+Tamanho (XS, S, M ou L): M
 Cor (Preta ou Branca): Preta
 Quantidade: 2
 True
