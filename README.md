@@ -128,9 +128,9 @@ O que faz: Termina a execução do programa.
 
 ### Tamanho ou cor inválidos ##
 
-Se for introduzido um tamanho ou uma cor inválidos, por exemplo XL ou preta`, o programa assume automaticamente:
-Tamanho inválido: `S`;
-Cor inválida: `Preta`.
+Se for introduzido um tamanho ou uma cor inválidos, por exemplo XL ou preta, o programa assume automaticamente:
+Tamanho inválido: S;
+Cor inválida: Preta.
 
 ### Quantidade inválida ##
 
@@ -142,7 +142,7 @@ Se for introduzido texto ou outro valor que não corresponda a um número inteir
 
 Não é possível adicionar ou remover peças através do menu.
 
-Todas as peças disponíveis são definidas previamente no ficheiro `src/Examples.hs`.
+Todas as peças disponíveis são definidas previamente no ficheiro src/Examples.hs.
 
 ## Estrutura do projeto ##
 
@@ -165,9 +165,9 @@ inventario-loja/
 Descrição dos ficheiros
 
 
- `Main.hs`  Apresenta o menu, lê os comandos e gere a interação com o utilizador. 
- `Model.hs`  Define os tipos de dados, incluindo `Tamanho`, `Cor`, `Artigo` e `Peca`. 
- `Inventory.hs`  Implementa as operações de pesquisa, venda e reposição de stock. 
- `Examples.hs`  Contém as peças e os dados iniciais utilizados para demonstrar o funcionamento do programa. 
- `cabal.project`  Configuração geral do projeto Cabal. 
- `inventario-loja.cabal`  Define a configuração, dependências e componentes do projeto. 
+ Main.hs  Apresenta o menu, lê os comandos e gere a interação com o utilizador. 
+ Model.hs  Define os tipos de dados, incluindo Tamanho, Cor, Artigo e Peca. 
+ Inventory.hs  Implementa as operações de pesquisa, venda e reposição de stock. 
+ Examples.hs  Contém as peças e os dados iniciais utilizados para demonstrar o funcionamento do programa. 
+ cabal.project  Configuração geral do projeto Cabal. 
+ inventario-loja.cabal  Define a configuração, dependências e componentes do projeto. 
