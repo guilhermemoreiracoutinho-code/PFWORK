@@ -1,14 +1,26 @@
 module Inventory where
- 
+
 import Model
- 
+
 procurarPecas :: String -> [Peca] -> [Peca]
 procurarPecas _ [] = []
 procurarPecas codigo (peca:resto)
   | codigo == codigoArtigo (artigo peca) =
       peca : procurarPecas codigo resto
   | otherwise = procurarPecas codigo resto
- 
+
+-- Quantidade necessaria para chegar ao stock alvo.
+quantidadeRepor :: Peca -> Int
+quantidadeRepor peca = stockAlvo peca - stockDisponivel peca
+
+-- Pecas abaixo do stock minimo, com a quantidade a repor.
+recomendacoes :: [Peca] -> [(Peca, Int)]
+recomendacoes [] = []
+recomendacoes (peca:resto)
+  | stockDisponivel peca < stockMinimo peca =
+      (peca, quantidadeRepor peca) : recomendacoes resto
+  | otherwise = recomendacoes resto
+
 -- sinal: -1 para vender (tira stock), 1 para repor (acrescenta stock).
 -- Devolve True e o inventario atualizado se a operacao for aceite,
 -- ou False e o inventario igual se for recusada.
@@ -27,4 +39,3 @@ alterarStock sinal codigo tam corEscolhida unidades (peca:resto)
       in (aceite, peca : novoResto)
   where
     novoStock = stockDisponivel peca + sinal * unidades
- 

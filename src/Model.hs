@@ -43,4 +43,3 @@ formatarPeca peca =
     ++ "Stock: " ++ show (stockDisponivel peca) ++ " | "
     ++ "Minimo: " ++ show (stockMinimo peca) ++ " | "
     ++ "Alvo: " ++ show (stockAlvo peca)
- 

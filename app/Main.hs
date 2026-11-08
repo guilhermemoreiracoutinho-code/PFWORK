@@ -11,13 +11,17 @@ main = do
 
 executar :: [Peca] -> IO ()
 executar inventario = do
-  putStrLn "\nComandos: ver | pesquisar | vender | repor | sair"
+  putStrLn "\nComandos: ver | recomendar | pesquisar | vender | repor | sair"
   putStr "Opcao: "
   comando <- getLine
 
   case comando of
     "ver" -> do
       mostrarPecas inventario
+      executar inventario
+
+    "recomendar" -> do
+      mostrarRecomendacoes (recomendacoes inventario)
       executar inventario
 
     "pesquisar" -> do
@@ -47,6 +51,12 @@ mostrarPecas (peca:resto) = do
   putStrLn (formatarPeca peca)
   mostrarPecas resto
 
+mostrarRecomendacoes :: [(Peca, Int)] -> IO ()
+mostrarRecomendacoes [] = return ()
+mostrarRecomendacoes ((peca, n):resto) = do
+  putStrLn (formatarPeca peca ++ " | Repor: " ++ show n)
+  mostrarRecomendacoes resto
+
 -- sinal: -1 para vender (tira stock), 1 para repor (acrescenta stock)
 pedirOperacao :: Int -> [Peca] -> IO [Peca]
 pedirOperacao sinal inventario = do
@@ -64,4 +74,3 @@ pedirOperacao sinal inventario = do
           unidades inventario
   print aceite
   return novoInventario
- 
